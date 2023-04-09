@@ -1,6 +1,7 @@
 //Naming the project server.js allow the npm start command to be used instead of adding node index.js to the packages.json
 
 const express = require('express')
+const path = require('path')
 
 const friendsRouter = require('./routers/friend.router')
 const messagesRouter = require('./routers/messages.router')
@@ -16,6 +17,7 @@ app.use((req, res, next) => {
     console.log(`${req.method} ${req.baseUrl}${req.url} ${delta}ms`)
 })
 
+app.use('/site',express.static(path.join(__dirname, 'public')))
 app.use(express.json())
 
 app.use('/friends', friendsRouter)
